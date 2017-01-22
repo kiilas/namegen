@@ -1,0 +1,168 @@
+# Orc ruleset for fantasy name generator
+# (c) 2017 kiilas@eluron.com
+
+# this is a comment
+
+# name generator starts with a NAME symbol
+# a NAME is usually just a word
+NAME > WORD * 8
+
+# but it is sometimes 2 names separated by a hyphen or by a space
+NAME > NAME + - + NAME
+NAME > NAME + [space] + NAME
+
+# a WORD is a bunch of syllables
+# it starts with an uppercase
+# we distinguish the final syllable because we want it closed more often
+# for euphony
+# we use syllable breaker for occasional apostrophes
+
+# a 1-syllable word
+WORD > [uppercase] + SYL_FINAL * 2
+
+# a 2-syllable word
+WORD > [uppercase] + SYL + SYL_BREAK + SYL_FINAL * 2
+
+# a polysyllable word; SYL_CHAIN will generate 1 or more syllables
+WORD > [uppercase] + SYL_CHAIN + SYL_BREAK + SYL_FINAL
+
+# a chain is obviously either a syllable, or a chain + syllable
+SYL_CHAIN > SYL * 4
+SYL_CHAIN > SYL_CHAIN + SYL_BREAK + SYL
+
+# a syllable breaker is usually nothing, rarely an apostrophe
+SYL_BREAK > [null] * 8
+SYL_BREAK > '
+
+# a syllable will have an equal chance of being open or closed
+# but a final syllable with have a higher chance of being closed
+SYL > SYL_OPEN
+SYL > SYL_CLOSED
+SYL_FINAL > SYL_OPEN
+SYL_FINAL > SYL_CLOSED * 4
+
+# syllables contain onset (the beginning), nucleus (vowel) and coda (ending)
+# above is an oversimplification, but will hold true in our phonology
+SYL_OPEN > ONSET + NUCLEUS
+SYL_CLOSED > ONSET + NUCLEUS + CODA
+
+# the onset can be multiple things (including null)
+# optional liquid is present in most cases
+# the following should satisfy orcish euphony
+ONSET > L? * 4
+ONSET > C + L? * 16
+ONSET > C_VOICED + C_VOICED + L? * 1
+ONSET > C_VOICELESS + C_VOICELESS + L? * 0.25
+
+# a nucleus will be a monophthong vowel
+NUCLEUS > V
+
+# a coda can be multiple things, and includes an optional liquid,
+# but never on its own (although a sole liquid can still occur via C)
+CODA > L? + C * 16
+CODA > L? + C_VOICED + C_VOICED * 1
+CODA > L? + C_VOICELESS + C_VOICELESS * 0.25
+CODA > N? + C * 16
+CODA > N? + C_VOICED + C_VOICED * 1
+CODA > N? + C_VOICELESS + C_VOICELESS * 0.25
+
+# C - consonants
+# orcish phonology here contains plosives, nasals, fricatives, affricates
+# and liquids
+C > P * 4
+C > N * 2
+C > F * 2
+C > A
+C > L
+
+C_VOICED > P_VOICED * 4
+C_VOICED > N * 2
+C_VOICED > F_VOICED * 2
+C_VOICED > A_VOICED
+C_VOICED > L
+
+C_VOICELESS > P_VOICELESS * 4
+C_VOICELESS > N * 2
+C_VOICELESS > F_VOICELESS * 2
+C_VOICELESS > A_VOICELESS
+C_VOICELESS > L
+
+# P - plosives
+# orcs prefer voiced plosives simply because they're voiced
+P > P_VOICED * 4
+P > P_VOICELESS
+
+P_VOICED > b
+P_VOICED > d
+P_VOICED > g
+
+P_VOICELESS > p
+P_VOICELESS > t
+P_VOICELESS > k
+P_VOICELESS > c * 0.0625
+P_VOICELESS > q * 0.0625
+
+# F - fricatives
+# orcs prefer voiced fricatives simply because they're voiced
+# also, back fricatives are emphasised
+F > F_VOICED * 4
+F > F_VOICELESS
+
+F_VOICED > z * 64
+F_VOICED > gh * 4
+F_VOICED > v * 4
+F_VOICED > bh
+F_VOICED > dh
+F_VOICED > zh
+
+F_VOICELESS > sh * 16
+F_VOICELESS > kh * 16
+F_VOICELESS > s * 16
+F_VOICELESS > f * 4
+F_VOICELESS > th * 4
+F_VOICELESS > h * 4
+F_VOICELESS > ph
+
+# N - nasals
+# N? is an occasional nasal, else null
+N? > [null] * 4
+N? > N
+
+N > m * 16
+N > n * 16
+N > ng * 4
+N > mh
+N > nh
+
+# L - liquids
+# L? is an occasional liquid, else null
+L? > [null] * 4
+L? > L
+
+L > l * 16
+L > r * 16
+L > y * 4
+L > w
+L > lh * 0.25
+L > rh * 0.25
+L > wh * 0.25
+
+# A - affricates
+A > A_VOICED * 4
+A > A_VOICELESS
+
+A_VOICED > j * 4
+A_VOICED > bv
+A_VOICED > dz * 4
+A_VOICED > dj
+
+A_VOICELESS > ch * 16
+A_VOICELESS > pf * 0.25
+A_VOICELESS > ts
+
+# orcs presumably favour low and back vowels
+V > a * 16
+V > e * 1
+V > i * 1
+V > o * 4
+V > u * 4

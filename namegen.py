@@ -2,30 +2,6 @@
 
 # fantasy name generator
 # (c) 2017 kiilas@eluron.com
-# for private personal use only
-# do not copy, do not modify, do not share
-
-# TODO allow multiple modules? what about frequencies?
-# TODO option for outputting other symbol than NAME
-# TODO make a few modules
-#      * elf
-#      * orc
-#        * add geminate?
-#        * input from cai?
-#        * simplify better?
-#      * dwarf
-#      * dragon
-#      * permissive and realistic/restricted version for each?
-#        * permissive better for handpicking, restricted for consistency
-# TODO verbose mode
-# TODO 'X + Y >' constructions
-#        ? * wildcards
-#        they should have priority
-# TODO move this to PLAN or todo
-# TODO 'import' in .def
-# TODO n-gram based
-# TODO RNN based
-# TODO release 0.1 on github
 
 from itertools import chain
 import getopt

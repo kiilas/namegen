@@ -1,4 +1,4 @@
-# This is a comment
+# This is a comment.
 
 # Name generation starts with a NAME symbol
 # a NAME is usually just a word...
@@ -10,21 +10,23 @@ NAME > WORD
 NAME > WORD + [space] + WORD * 0.25
 
 # The "* 0.25" above makes the transformation 4 times less likely than without
-# that qualifier
+# that qualifier.
 
 # A word will have anywhere between 1-3 syllables, but let's make
 # 2-syllable words most likely, and use "[uppercase]" meta-symbol to make the
-# succeeding character uppercase
+# succeeding character uppercase:
 
 WORD > [uppercase] + SYLLABLE
 WORD > [uppercase] + SYLLABLE + SYLLABLE * 4
 WORD > [uppercase] + SYLLABLE + SYLLABLE + SYLLABLE
 
-# Our syllable will have a consonant and a vowel
+# Another meta-symbol is [null] which stands for no characters.
+
+# Our syllable will have a consonant and a vowel:
 
 SYLLABLE > CONSONANT + VOWEL
 
-# Let's define consonants and vowels
+# Let's define consonants and vowels:
 
 CONSONANT > b * 2
 CONSONANT > d * 2

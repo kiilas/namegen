@@ -1,0 +1,52 @@
+# Dwarf ruleset for fantasy name generator
+# (c) 2017 kiilas@eluron.com
+
+NAME > WORD
+
+WORD > [uppercase] + SINGLE_SYL
+WORD > [uppercase] + SYL_FIRST + SYL_FINAL * 8
+WORD > [uppercase] + SYL_CHAIN + SYL + SYL_FINAL * 8
+
+SYL_CHAIN > SYL_FIRST * 4
+SYL_CHAIN > SYL_CHAIN + SYL
+
+SINGLE_SYL > ONSET + NUCLEUS + CODA
+SYL_FIRST > ONSET? + NUCLEUS + CODA?
+SYL > ONSET + NUCLEUS + CODA?
+SYL_FINAL > ONSET + NUCLEUS + CODA_USUALLY
+
+ONSET? > [null]
+ONSET? > ONSET
+
+CODA? > [null] * 8
+CODA? > CODA
+
+CODA_USUALLY > CODA * 4
+CODA_USUALLY > [null]
+
+ONSET > C
+NUCLEUS > V
+CODA > C
+
+C > p
+C > b * 4
+C > t
+C > d * 4
+C > k * 4
+C > g * 4
+C > q
+C > m
+C > n
+C > r * 4
+C > f
+C > v
+C > s
+C > sh
+C > z * 4
+C > kh * 4
+C > gh
+C > l
+
+V > a
+V > i
+V > u

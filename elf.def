@@ -1,0 +1,105 @@
+# Elf ruleset for fantasy name generator
+# (c) 2017 kiilas@eluron.com
+
+NAME > WORD * 8
+NAME > NAME + [space] + NAME
+NAME > NAME + - + NAME
+
+WORD > [uppercase] + SYL_CLOSED
+WORD > [uppercase] + SYL_CHAIN + SYL_BREAK + SYL_FINAL * 8
+
+SYL_CHAIN > SYL * 4
+SYL_CHAIN > SYL_CHAIN + SYL_BREAK + SYL
+
+SYL_BREAK > [null] * 4
+SYL_BREAK > '
+
+SYL > SYL_OPEN
+SYL > SYL_CLOSED
+SYL_FINAL > SYL_OPEN
+SYL_FINAL > SYL_CLOSED * 4
+
+SYL_OPEN > ONSET + NUCLEUS
+SYL_CLOSED > ONSET + NUCLEUS + CODA
+
+ONSET > C + G?
+
+NUCLEUS > V
+
+CODA > GEM? + C
+
+GEM? > [null] * 8
+GEM? > [geminate]
+
+C > P
+C > N * 2
+C > F * 2
+C > L * 4
+
+C_VOICED > P_VOICED
+C_VOICED > N * 2
+C_VOICED > F_VOICED * 2
+C_VOICED > L * 4
+
+C_VOICELESS > P_VOICELESS
+C_VOICELESS > N * 2
+C_VOICELESS > F_VOICELESS * 2
+C_VOICELESS > L * 4
+
+P > P_VOICED
+P > P_VOICELESS
+
+P_VOICED > b
+P_VOICED > d
+P_VOICED > g
+
+P_VOICELESS > p
+P_VOICELESS > t
+P_VOICELESS > c
+
+F > F_VOICED
+F > F_VOICELESS
+
+F_VOICED > dh
+F_VOICED > v
+
+F_VOICELESS > s * 4
+F_VOICELESS > th * 4
+F_VOICELESS > ch * 2
+F_VOICELESS > f * 2
+F_VOICELESS > h
+F_VOICELESS > ph
+
+N? > [null] * 4
+N? > N
+
+N > m * 4
+N > n * 4
+N > ng
+N > mh
+N > nh
+
+L > l * 8
+L > r * 8
+L > w
+L > hl
+L > hr
+L > hw * 0.25
+
+G? > [null] * 8
+G? > G
+
+G > w * 4
+G > l * 2
+G > r
+
+V > a * 4
+V > e * 4
+V > i * 8
+V > o
+V > u * 2
+V > y
+V > ae * 2
+V > ai
+V > oe
+V > ui

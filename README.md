@@ -26,44 +26,53 @@ Requires Python 3. Runs as a standalone executable/script.
 **count** is the number of names to output; default is *24*.
 
 ## Sample outputs
-`namegen.py -m orc -c 10`
-> Larrz
-> Mad
-> Buzgo
-> Lach
-> Zazz
-> Jellzdud
-> Khadzad
-> Bazradz
-> Ul
-> Mazzall
+```
+> namegen.py -m orc -c 10
+Larrz
+Mad
+Buzgo
+Lach
+Zazz
+Jellzdud
+Khadzad
+Bazradz
+Ul
+Mazzall
+```
 
-`namegen.py -m elf -c 10`
-> Remidh
-> Lirynyw
-> Rwaehrir
-> Lur Rysaes
-> Rim
-> Loeli
-> Lwedh'suiv
-> Naene
-> Lerrae
-> Hwai'dhuilmaer
+```
+> namegen.py -m elf -c 10
+Remidh
+Lirynyw
+Rwaehrir
+Lur Rysaes
+Rim
+Loeli
+Lwedh'suiv
+Naene
+Lerrae
+Hwai'dhuilmaer
+```
 
-`namegen.py -m dwarf -c 10`
-> Bigug
-> Arizag
-> Rikhigip
-> Zakha
-> Ramizal
-> Puqash
-> Urid
-> Ibin
-> Bak
-> Raviv
+```
+> namegen.py -m dwarf -c 10
+Bigug
+Arizag
+Rikhigip
+Zakha
+Ramizal
+Puqash
+Urid
+Ibin
+Bak
+Raviv
+```
 
 ## Module syntax
 See **sample.def**.
+
+## Authors
+* kiilas [kiilas(at)eluron.com]
 
 ## License
 AGPL; see LICENSE for the full text of the license for this project.
